@@ -1,0 +1,16 @@
+---
+- name: Install Apache
+  dnf:
+    name: httpd
+    state: present
+
+- name: Start and Enable Apache
+  service:
+    name: httpd
+    state: started
+    enabled: true
+
+- name: Deploy dynamic index page
+  template:
+    src: backend_index.html.j2
+    dest: /var/www/html/index.html

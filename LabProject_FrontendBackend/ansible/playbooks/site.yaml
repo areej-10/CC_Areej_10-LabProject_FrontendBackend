@@ -1,0 +1,17 @@
+---
+- name: Gather facts from all hosts
+  hosts: all
+  gather_facts: yes
+  become: true
+
+- name: Configure backend HTTPD servers
+  hosts: backends
+  become: true
+  roles:
+    - backend
+
+- name: Configure frontend Nginx load balancer
+  hosts: frontend
+  become: true
+  roles:
+    - frontend

@@ -1,0 +1,16 @@
+events {}
+
+http {
+    upstream my_app {
+        server {{ backend1_private_ip }}:80;
+        server {{ backend2_private_ip }}:80;
+        server {{ backup_backend_private_ip }}:80 backup;
+    }
+
+    server {
+        listen 80;
+        location / {
+            proxy_pass http://my_app;
+        }
+    }
+}
